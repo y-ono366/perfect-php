@@ -97,7 +97,7 @@ function part425(){
     $escaped = array_map(function($val) {
         return htmlspecialchars($val,ENT_QUOTES);
     },$ar);
-    var_dump( $escaped,PHP_EOL);
+    var_dump( $escaped);
 }
 
 function part425_1(){
@@ -106,7 +106,30 @@ function part425_1(){
             return pow($v,$items);
         };
     };
-    var_dump($my_pow(3));
+    $cube = $my_pow(3);
+    $cube2 = $my_pow(4);
+    var_dump($cube);
+    var_dump($cube2);
+}
+
+function part425_2(){
+    function create_counter() {
+        $count = 0;
+        return function() use (&$count) {
+            return ++$count;
+        };
+    }
+    $counter = create_counter();
+    echo $counter() . PHP_EOL;
+    echo $counter() . PHP_EOL;
+    echo $counter() . PHP_EOL;
+}
+
+function part425_3($num){
+    echo $num,PHP_EOL;
+    return function ($n) use(&$num){
+        return $n*2 . PHP_EOL;
+    };
 }
 
 part411();
@@ -121,3 +144,6 @@ part423();
 part424();
 part425();
 part425_1();
+part425_2();
+var_dump(part425_3(4));
+var_dump(part425_3(2));
